@@ -51,6 +51,10 @@ def main():
     path = os.path.join(out_dir, "entry.txt")
     with open(path, "w", encoding="utf-8", newline="\n") as handle:
         handle.write(LINE)
+    with open(path, "r", encoding="utf-8") as handle:
+        if handle.read() != LINE:
+            print("round-trip mismatch in %s" % path, file=sys.stderr)
+            return 1
     print("wrote %d chars to %s" % (len(LINE), path))
     return 0
 
